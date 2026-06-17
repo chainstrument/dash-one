@@ -3,6 +3,7 @@ import Widget from './components/Widget'
 import ClockWidget from './components/ClockWidget'
 import WeatherWidget from './components/WeatherWidget'
 import QuoteWidget from './components/QuoteWidget'
+import ToDoWidget from './components/ToDoWidget'
 
 function App() {
   return (
@@ -33,9 +34,7 @@ function App() {
           <ClockWidget />
           <WeatherWidget />
           <QuoteWidget />
-          <Widget title="Widget To-Do">
-            <p>Gère tes tâches quotidiennes rapidement.</p>
-          </Widget>
+          <ToDoWidget />
         </section>
       </main>
 
