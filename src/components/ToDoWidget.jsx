@@ -28,6 +28,7 @@ export default function ToDoWidget() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ajouter une tâche..."
+            autoFocus
           />
           <button type="submit" className="btn btn-primary">
             Ajouter
