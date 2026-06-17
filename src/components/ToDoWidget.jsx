@@ -25,6 +25,10 @@ export default function ToDoWidget() {
     ))
   }
 
+  function handleDeleteTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
   return (
     <Widget title="Widget To-Do">
       <div className="todo-widget">
@@ -54,6 +58,13 @@ export default function ToDoWidget() {
                   className="todo-checkbox"
                 />
                 <span>{todo.text}</span>
+                <button
+                  onClick={() => handleDeleteTodo(todo.id)}
+                  className="todo-delete-btn"
+                  title="Supprimer cette tâche"
+                >
+                  ✕
+                </button>
               </li>
             ))}
           </ul>
