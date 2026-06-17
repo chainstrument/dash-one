@@ -19,6 +19,12 @@ export default function ToDoWidget() {
     setInput('')
   }
 
+  function handleToggleTodo(id) {
+    setTodos(todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ))
+  }
+
   return (
     <Widget title="Widget To-Do">
       <div className="todo-widget">
@@ -40,7 +46,13 @@ export default function ToDoWidget() {
         ) : (
           <ul className="todo-list">
             {todos.map((todo) => (
-              <li key={todo.id} className="todo-item">
+              <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleToggleTodo(todo.id)}
+                  className="todo-checkbox"
+                />
                 <span>{todo.text}</span>
               </li>
             ))}
