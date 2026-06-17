@@ -1,5 +1,6 @@
 import './App.css'
 import Widget from './components/Widget'
+import ClockWidget from './components/ClockWidget'
 
 function App() {
   return (
@@ -27,9 +28,7 @@ function App() {
         </section>
 
         <section className="dashboard-grid" aria-label="Zone dashboard principale">
-          <Widget title="Widget Horloge" large>
-            <p>Affiche l'heure et la date en temps réel.</p>
-          </Widget>
+          <ClockWidget />
           <Widget title="Widget Météo">
             <p>Affiche la météo locale et les conditions actuelles.</p>
           </Widget>
