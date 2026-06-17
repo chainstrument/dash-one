@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Widget from './Widget'
 
-const QUOTES_API = 'https://type.fit/api/quotes'
+const QUOTES_API = '/api/quotes'
 
 function pickRandomQuote(quotes) {
   return quotes[Math.floor(Math.random() * quotes.length)]
@@ -33,6 +33,9 @@ export default function QuoteWidget() {
       const randomQuote = pickRandomQuote(data)
       setQuote({ text: randomQuote.text, author: randomQuote.author || 'Anonyme' })
     } catch (err) {
+      console.error('QuoteWidget fetch error:', err)
+      // Normalize error message for display
+      const msg = err && err.message ? err.message : String(err)
       setError(err.message || 'Erreur lors de la récupération de la citation')
     } finally {
       setLoading(false)
