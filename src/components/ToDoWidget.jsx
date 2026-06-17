@@ -1,9 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Widget from './Widget'
 
 export default function ToDoWidget() {
   const [todos, setTodos] = useState([])
   const [input, setInput] = useState('')
+
+  // Charger les todos depuis localStorage au montage
+  useEffect(() => {
+    const savedTodos = localStorage.getItem('todos')
+    if (savedTodos) {
+      try {
+        setTodos(JSON.parse(savedTodos))
+      } catch (e) {
+        console.error('Erreur lors de la lecture des tâches:', e)
+      }
+    }
+  }, [])
+
+  // Sauvegarder les todos dans localStorage à chaque changement
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   function handleAddTodo(event) {
     event.preventDefault()
