@@ -46,7 +46,7 @@ export default function ToDoWidget() {
         </form>
 
         {todos.length === 0 ? (
-          <p className="todo-empty">Aucune tâche. Commence à en ajouter !</p>
+          <p className="todo-empty">Aucune tâche. Commence à en ajouter une !</p>
         ) : (
           <ul className="todo-list">
             {todos.map((todo) => (
