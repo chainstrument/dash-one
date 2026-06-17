@@ -36,17 +36,33 @@ function formatTemperature(value) {
   return `${Math.round(value)}°C`
 }
 
+function loadWeatherPreferences() {
+  try {
+    const saved = localStorage.getItem('weatherCity')
+    return saved || 'Paris'
+  } catch (e) {
+    console.error('Erreur lors de la lecture des préférences météo:', e)
+    return 'Paris'
+  }
+}
+
 export default function WeatherWidget() {
-  const [city, setCity] = useState('Paris')
-  const [search, setSearch] = useState('Paris')
+  const [city, setCity] = useState(loadWeatherPreferences)
+  const [search, setSearch] = useState('')
   const [weather, setWeather] = useState(null)
   const [location, setLocation] = useState(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
+  // Sauvegarder la ville dans localStorage quand elle change
+  useEffect(() => {
+    localStorage.setItem('weatherCity', city)
+  }, [city])
+
   useEffect(() => {
     fetchWeather(city)
-  }, [])
+    setSearch(city)
+  }, [city])
 
   async function fetchWeather(queryCity) {
     setLoading(true)
