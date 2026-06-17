@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import Widget from './Widget'
 
-const QUOTE_API = 'https://api.quotable.io/random'
+const QUOTES_API = 'https://type.fit/api/quotes'
+
+function pickRandomQuote(quotes) {
+  return quotes[Math.floor(Math.random() * quotes.length)]
+}
 
 export default function QuoteWidget() {
   const [quote, setQuote] = useState(null)
@@ -16,13 +20,18 @@ export default function QuoteWidget() {
     setLoading(true)
     setError('')
     try {
-      const response = await fetch(QUOTE_API)
+      const response = await fetch(QUOTES_API)
       if (!response.ok) {
         throw new Error('Impossible de récupérer la citation')
       }
 
       const data = await response.json()
-      setQuote({ text: data.content, author: data.author })
+      if (!Array.isArray(data) || data.length === 0) {
+        throw new Error('Aucune citation disponible')
+      }
+
+      const randomQuote = pickRandomQuote(data)
+      setQuote({ text: randomQuote.text, author: randomQuote.author || 'Anonyme' })
     } catch (err) {
       setError(err.message || 'Erreur lors de la récupération de la citation')
     } finally {
