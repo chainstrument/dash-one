@@ -2,6 +2,7 @@ import './App.css'
 import Widget from './components/Widget'
 import ClockWidget from './components/ClockWidget'
 import WeatherWidget from './components/WeatherWidget'
+import QuoteWidget from './components/QuoteWidget'
 
 function App() {
   return (
@@ -31,9 +32,7 @@ function App() {
         <section className="dashboard-grid" aria-label="Zone dashboard principale">
           <ClockWidget />
           <WeatherWidget />
-          <Widget title="Widget Citation">
-            <p>Une citation inspirante du jour.</p>
-          </Widget>
+          <QuoteWidget />
           <Widget title="Widget To-Do">
             <p>Gère tes tâches quotidiennes rapidement.</p>
           </Widget>
