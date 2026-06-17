@@ -1,4 +1,5 @@
 import './App.css'
+import Widget from './components/Widget'
 
 function App() {
   return (
@@ -26,22 +27,18 @@ function App() {
         </section>
 
         <section className="dashboard-grid" aria-label="Zone dashboard principale">
-          <article className="widget widget-large">
-            <h2>Widget Horloge</h2>
+          <Widget title="Widget Horloge" large>
             <p>Affiche l'heure et la date en temps réel.</p>
-          </article>
-          <article className="widget">
-            <h2>Widget Météo</h2>
+          </Widget>
+          <Widget title="Widget Météo">
             <p>Affiche la météo locale et les conditions actuelles.</p>
-          </article>
-          <article className="widget">
-            <h2>Widget Citation</h2>
+          </Widget>
+          <Widget title="Widget Citation">
             <p>Une citation inspirante du jour.</p>
-          </article>
-          <article className="widget">
-            <h2>Widget To-Do</h2>
+          </Widget>
+          <Widget title="Widget To-Do">
             <p>Gère tes tâches quotidiennes rapidement.</p>
-          </article>
+          </Widget>
         </section>
       </main>
 
