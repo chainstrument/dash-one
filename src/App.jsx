@@ -6,28 +6,49 @@ import WeatherWidget from './components/WeatherWidget'
 import QuoteWidget from './components/QuoteWidget'
 import ToDoWidget from './components/ToDoWidget'
 
+const WIDGET_COMPONENTS = {
+  clock:   <ClockWidget />,
+  weather: <WeatherWidget />,
+  quote:   <QuoteWidget />,
+  todo:    <ToDoWidget />,
+}
+
 const DEFAULT_WIDGETS = [
-  { id: 'clock',   label: 'Horloge',   visible: true },
-  { id: 'weather', label: 'Météo',     visible: true },
-  { id: 'quote',   label: 'Citation',  visible: true },
-  { id: 'todo',    label: 'To-Do',     visible: true },
+  { id: 'clock',   label: 'Horloge',  visible: true },
+  { id: 'weather', label: 'Météo',    visible: true },
+  { id: 'quote',   label: 'Citation', visible: true },
+  { id: 'todo',    label: 'To-Do',    visible: true },
 ]
 
 function loadWidgets() {
   try {
-    const saved = localStorage.getItem('widgetVisibility')
+    const saved = localStorage.getItem('widgetPrefs')
     if (!saved) return DEFAULT_WIDGETS
-    const savedMap = JSON.parse(saved)
-    return DEFAULT_WIDGETS.map(w => ({ ...w, visible: savedMap[w.id] ?? w.visible }))
+    const prefs = JSON.parse(saved)
+    const order = prefs.order ?? DEFAULT_WIDGETS.map(w => w.id)
+    const visibility = prefs.visibility ?? {}
+    return order
+      .map(id => DEFAULT_WIDGETS.find(w => w.id === id))
+      .filter(Boolean)
+      .map(w => ({ ...w, visible: visibility[w.id] ?? w.visible }))
   } catch {
     return DEFAULT_WIDGETS
   }
+}
+
+function saveWidgets(widgets) {
+  localStorage.setItem('widgetPrefs', JSON.stringify({
+    order: widgets.map(w => w.id),
+    visibility: Object.fromEntries(widgets.map(w => [w.id, w.visible])),
+  }))
 }
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
   const [widgets, setWidgets] = useState(loadWidgets)
   const [panelOpen, setPanelOpen] = useState(false)
+  const [dragSrc, setDragSrc] = useState(null)
+  const [dragOver, setDragOver] = useState(null)
   const panelRef = useRef(null)
 
   useEffect(() => {
@@ -36,8 +57,7 @@ function App() {
   }, [theme])
 
   useEffect(() => {
-    const map = Object.fromEntries(widgets.map(w => [w.id, w.visible]))
-    localStorage.setItem('widgetVisibility', JSON.stringify(map))
+    saveWidgets(widgets)
   }, [widgets])
 
   useEffect(() => {
@@ -58,7 +78,33 @@ function App() {
     setWidgets(ws => ws.map(w => w.id === id ? { ...w, visible: !w.visible } : w))
   }
 
-  const isVisible = id => widgets.find(w => w.id === id)?.visible
+  function handleDragStart(id) {
+    setDragSrc(id)
+  }
+
+  function handleDragOver(e, id) {
+    e.preventDefault()
+    if (id !== dragSrc) setDragOver(id)
+  }
+
+  function handleDrop(targetId) {
+    if (!dragSrc || dragSrc === targetId) return
+    setWidgets(ws => {
+      const result = [...ws]
+      const srcIdx = result.findIndex(w => w.id === dragSrc)
+      const tgtIdx = result.findIndex(w => w.id === targetId)
+      const [moved] = result.splice(srcIdx, 1)
+      result.splice(tgtIdx, 0, moved)
+      return result
+    })
+    setDragSrc(null)
+    setDragOver(null)
+  }
+
+  function handleDragEnd() {
+    setDragSrc(null)
+    setDragOver(null)
+  }
 
   return (
     <>
@@ -112,10 +158,19 @@ function App() {
         </section>
 
         <section className="dashboard-grid" aria-label="Zone dashboard principale">
-          {isVisible('clock')   && <ClockWidget />}
-          {isVisible('weather') && <WeatherWidget />}
-          {isVisible('quote')   && <QuoteWidget />}
-          {isVisible('todo')    && <ToDoWidget />}
+          {widgets.filter(w => w.visible).map(w => (
+            <div
+              key={w.id}
+              className={`drag-item${dragSrc === w.id ? ' dragging' : ''}${dragOver === w.id ? ' drag-over' : ''}`}
+              draggable
+              onDragStart={() => handleDragStart(w.id)}
+              onDragOver={e => handleDragOver(e, w.id)}
+              onDrop={() => handleDrop(w.id)}
+              onDragEnd={handleDragEnd}
+            >
+              {WIDGET_COMPONENTS[w.id]}
+            </div>
+          ))}
         </section>
       </main>
 
