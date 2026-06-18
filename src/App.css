@@ -7,8 +7,8 @@
   align-items: center;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
-  background: rgba(15, 23, 42, 0.95);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-default);
   backdrop-filter: blur(12px);
 }
 
@@ -24,13 +24,13 @@
 }
 
 .app-nav a {
-  color: #cbd5e1;
+  color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .app-nav a:hover {
-  color: #f8fafc;
+  color: var(--text-primary);
 }
 
 .dashboard-shell {
@@ -46,14 +46,14 @@
   gap: 1.5rem;
   padding: 2rem;
   margin-bottom: 2rem;
-  border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: var(--radius-2xl);
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
 }
 
 .eyebrow {
   margin: 0 0 0.75rem;
-  color: #93c5fd;
+  color: var(--accent-light);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.8rem;
@@ -68,7 +68,7 @@
 .hero p {
   margin: 1rem 0 0;
   max-width: 55ch;
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
 .hero-actions {
@@ -79,11 +79,11 @@
 }
 
 .btn {
-  border: 1px solid rgba(148, 163, 184, 0.24);
+  border: 1px solid var(--border-btn);
   background: rgba(148, 163, 184, 0.08);
-  color: #e2e8f0;
+  color: var(--text-secondary);
   padding: 0.95rem 1.5rem;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
   font-family: inherit;
@@ -95,7 +95,7 @@
 }
 
 .btn-primary {
-  background: #2563eb;
+  background: var(--accent-dark);
   border-color: transparent;
   color: white;
 }
@@ -110,9 +110,9 @@
   grid-column: span 6;
   min-height: 170px;
   padding: 1.5rem;
-  border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: var(--radius-2xl);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   box-shadow: 0 24px 72px rgba(15, 23, 42, 0.12);
 }
 
@@ -127,7 +127,7 @@
 
 .widget p {
   margin: 0;
-  color: #cbd5e1;
+  color: var(--text-muted);
   line-height: 1.7;
 }
 
@@ -140,12 +140,12 @@
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: #f8fafc;
+  color: var(--text-primary);
 }
 
 .clock-date {
   font-size: 1rem;
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
 .weather-form {
@@ -164,10 +164,10 @@
   flex: 1 1 180px;
   min-width: 0;
   padding: 0.85rem 1rem;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-input);
+  background: var(--bg-input);
+  color: var(--text-secondary);
 }
 
 .weather-row input:focus {
@@ -176,9 +176,9 @@
 
 .weather-error {
   padding: 0.85rem 1rem;
-  border-radius: 1rem;
-  background: rgba(239, 68, 68, 0.12);
-  color: #fecdd3;
+  border-radius: var(--radius-xl);
+  background: var(--error-bg);
+  color: var(--error-text);
   margin-bottom: 1rem;
 }
 
@@ -189,7 +189,7 @@
 
 .weather-location {
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--text-primary);
 }
 
 .weather-details {
@@ -200,7 +200,7 @@
 .weather-label {
   display: inline-block;
   min-width: 100px;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .quote-widget {
@@ -212,21 +212,21 @@
   margin: 0;
   font-size: 1rem;
   line-height: 1.7;
-  color: #e2e8f0;
+  color: var(--text-secondary);
 }
 
 .quote-author {
   margin: 0;
-  color: #94a3b8;
+  color: var(--text-subtle);
   text-align: right;
   font-style: italic;
 }
 
 .quote-error {
   padding: 0.85rem 1rem;
-  border-radius: 1rem;
-  background: rgba(239, 68, 68, 0.12);
-  color: #fecdd3;
+  border-radius: var(--radius-xl);
+  background: var(--error-bg);
+  color: var(--error-text);
 }
 
 .todo-widget {
@@ -244,10 +244,10 @@
   flex: 1 1 150px;
   min-width: 0;
   padding: 0.85rem 1rem;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-input);
+  background: var(--bg-input);
+  color: var(--text-secondary);
 }
 
 .todo-form input:focus {
@@ -264,9 +264,9 @@
 
 .todo-item {
   padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  color: var(--text-secondary);
   line-height: 1.5;
   word-break: break-word;
   display: flex;
@@ -279,7 +279,7 @@
   width: 1.25rem;
   height: 1.25rem;
   cursor: pointer;
-  accent-color: #60a5fa;
+  accent-color: var(--accent);
 }
 
 .todo-item.completed {
@@ -288,7 +288,7 @@
 
 .todo-item.completed span {
   text-decoration: line-through;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .todo-delete-btn {
@@ -296,10 +296,10 @@
   margin-left: auto;
   width: 1.75rem;
   height: 1.75rem;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 0.5rem;
-  background: rgba(239, 68, 68, 0.1);
-  color: #fca5a5;
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  color: var(--danger-text);
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: bold;
@@ -329,14 +329,14 @@
 .todo-empty {
   padding: 1rem;
   text-align: center;
-  color: #94a3b8;
+  color: var(--text-subtle);
   font-style: italic;
 }
 
 .app-footer {
   text-align: center;
   padding: 1rem 1.5rem 2rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 @media (max-width: 900px) {
