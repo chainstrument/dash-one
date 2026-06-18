@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import './App.css'
 import Widget from './components/Widget'
 import ClockWidget from './components/ClockWidget'
@@ -6,6 +7,17 @@ import QuoteWidget from './components/QuoteWidget'
 import ToDoWidget from './components/ToDoWidget'
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  function toggleTheme() {
+    setTheme(t => t === 'dark' ? 'light' : 'dark')
+  }
+
   return (
     <>
       <header className="app-header">
@@ -15,6 +27,9 @@ function App() {
           <a href="#">Widgets</a>
           <a href="#">À propos</a>
         </nav>
+        <button className="btn theme-toggle" onClick={toggleTheme} title="Changer de thème">
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
       </header>
 
       <main className="dashboard-shell">
