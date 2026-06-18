@@ -60,6 +60,12 @@ export default function ToDoWidget() {
           </button>
         </form>
 
+        {todos.length > 0 && (
+          <p className="todo-stats">
+            {todos.filter(t => t.completed).length} / {todos.length} tâche{todos.length > 1 ? 's' : ''} complétée{todos.filter(t => t.completed).length > 1 ? 's' : ''}
+          </p>
+        )}
+
         {todos.length === 0 ? (
           <p className="todo-empty">Aucune tâche. Commence à en ajouter une !</p>
         ) : (
