@@ -45,6 +45,37 @@
   --radius-full: 999px;
 }
 
+[data-theme="light"] {
+  color-scheme: light;
+  color: #1e293b;
+
+  --bg-base: #f1f5f9;
+  --bg-surface: rgba(255, 255, 255, 0.9);
+  --bg-surface-alt: rgba(255, 255, 255, 0.95);
+  --bg-header: rgba(248, 250, 252, 0.95);
+  --bg-input: rgba(15, 23, 42, 0.04);
+
+  --text-primary: #0f172a;
+  --text-secondary: #1e293b;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+
+  --accent: #3b82f6;
+  --accent-dark: #1d4ed8;
+  --accent-light: #2563eb;
+
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-default: rgba(15, 23, 42, 0.12);
+  --border-input: rgba(15, 23, 42, 0.2);
+  --border-btn: rgba(15, 23, 42, 0.15);
+
+  --error-bg: rgba(239, 68, 68, 0.08);
+  --error-text: #dc2626;
+  --danger-border: rgba(239, 68, 68, 0.3);
+  --danger-bg: rgba(239, 68, 68, 0.08);
+  --danger-text: #ef4444;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -58,6 +89,11 @@ body {
 body {
   background: radial-gradient(circle at top, rgba(96, 165, 250, 0.18), transparent 28%),
     linear-gradient(180deg, #0b1120 0%, #0a1223 100%);
+}
+
+[data-theme="light"] body {
+  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 28%),
+    linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
 }
 
 button,
